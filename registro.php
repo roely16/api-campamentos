@@ -31,7 +31,9 @@
             $campamento = $data->campamento->id;
             $rol = $data->rol->id;
 
-            $sql = "INSERT INTO usuario (nombre, apellido, telefono, email, id_campamento, id_rol, created_at) VALUES ('$data->nombre', '$data->apellido', '$data->telefono', '$data->email', $campamento, $rol, NOW())";
+            $hash_password = password_hash($data->password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO usuario (nombre, apellido, telefono, password, email, id_campamento, id_rol, created_at) VALUES ('$data->nombre', '$data->apellido', '$data->telefono', '$hash_password', '$data->email', $campamento, $rol, NOW())";
 
             $result = $conn->query($sql);
 
@@ -121,9 +123,9 @@
                             $mail->isHTML(true);                                  // Set email format to HTML
                             $mail->Subject = 'Aprobación de Cuenta';
 
-                            $url_aceptar = "http://localhost:8080/#/aceptar_cuenta/".$id_usuario;
+                            $url_aceptar = "https://udicat.muniguate.com/apps/campamentos/app-campamentos/#/aceptar_cuenta/".$id_usuario;
 
-                            $url_rechazar = "http://localhost:8080/#/rechazar_cuenta/".$id_usuario;
+                            $url_rechazar = "https://udicat.muniguate.com/apps/campamentos/app-campamentos/#/rechazar_cuenta/".$id_usuario;
 
                             $mail->Body    =    '<h1>¡Atención!</h1>' .
                                                 '<h3>Un nuevo usuario requiere de su aprobación para completar el registro.</h3>' .
