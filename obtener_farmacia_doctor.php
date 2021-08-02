@@ -17,6 +17,7 @@
                 ON t1.id_colonia = t2.id
                 WHERE t1.id_estado = 3
                 AND t1.id_campamento = $data->id_campamento
+                AND DATE_FORMAT(t1.created_at, '%Y-%m-%d') > '2021-04-28'
                 ORDER BY t1.correlativo DESC";
 
         $result = $conn->query($sql);

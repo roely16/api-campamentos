@@ -21,6 +21,12 @@
 
         $paciente["zona"] = intval($paciente["zona"]);
 
+        if ($paciente["otra_vacuna"]) {
+            
+            $paciente["otra_vacuna_check"] = true;
+
+        }
+
         // // Sintomas
         // $sql = "SELECT *
         //         FROM sintoma";
