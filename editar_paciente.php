@@ -56,29 +56,11 @@
 
         }
 
-        if ($data->astrazeneca) {
-            
-            $data->astrazeneca = 'S';
-
-        }else{
-
-            $data->astrazeneca = null;
-
-        }
-
-        if($data->sputnik_v){
-
-            $data->sputnik_v = 'S';
-
-        }else{
-
-            $data->sputnik_v = null;
-
-        }
-
         $data->id_clasificacion = !empty($data->id_clasificacion) ? "'$data->id_clasificacion'" : "NULL";
 
-        $sql = "UPDATE paciente SET nombre = '$data->nombre', apellido = '$data->apellido', dpi = '$data->dpi', genero = '$data->genero', fecha_nacimiento = '$data->fecha_nacimiento', edad = '$data->edad', direccion = '$data->direccion', colonia = '$data->colonia', zona = '$data->zona', afiliacion_igss = '$data->afiliacion_igss', observaciones = '$data->observaciones', updated_at = NOW(), segundo_nombre = '$data->segundo_nombre', segundo_apellido = '$data->segundo_apellido', toma_temperatura = '$data->toma_temperatura', calle = '$data->calle', avenida = '$data->avenida', nomenclatura = '$data->nomenclatura', barrio = '$data->barrio', observaciones_direccion = '$data->observaciones_direccion', contacto_paciente_positivo = '$data->contacto_paciente_positivo', cuanto_tiempo_contacto = '$data->cuanto_tiempo_contacto', por_cuanto_tiempo_contacto = '$data->por_cuanto_tiempo_contacto', vive_mismo_lugar = '$data->vive_mismo_lugar', atencion_sin_equipo = '$data->atencion_sin_equipo', numero_contacto = '$data->numero_contacto', direccion = '$data->direccion', id_colonia = '$data->id_colonia', otra_colonia = '$data->otra_colonia', id_clasificacion = $data->id_clasificacion, cui = '$data->cui', pasaporte = '$data->pasaporte', frecuencia_cardiaca = '$data->frecuencia_cardiaca', frecuencia_respiratoria = '$data->frecuencia_respiratoria', saturacion_oxigeno = '$data->saturacion_oxigeno', edad_meses = '$data->edad_meses', vacunado = '$data->vacunado', esquema_completo = '$data->esquema_completo', astrazeneca = '$data->astrazeneca', sputnik_v = '$data->sputnik_v', otra_vacuna = '$data->otra_vacuna' WHERE id = $data->id";
+        $data->vacuna_id = !empty($data->vacuna_id) ? "'$data->vacuna_id'" : "NULL";
+
+        $sql = "UPDATE paciente SET nombre = '$data->nombre', apellido = '$data->apellido', dpi = '$data->dpi', genero = '$data->genero', fecha_nacimiento = '$data->fecha_nacimiento', edad = '$data->edad', direccion = '$data->direccion', colonia = '$data->colonia', zona = '$data->zona', afiliacion_igss = '$data->afiliacion_igss', observaciones = '$data->observaciones', updated_at = NOW(), segundo_nombre = '$data->segundo_nombre', segundo_apellido = '$data->segundo_apellido', toma_temperatura = '$data->toma_temperatura', calle = '$data->calle', avenida = '$data->avenida', nomenclatura = '$data->nomenclatura', barrio = '$data->barrio', observaciones_direccion = '$data->observaciones_direccion', contacto_paciente_positivo = '$data->contacto_paciente_positivo', cuanto_tiempo_contacto = '$data->cuanto_tiempo_contacto', por_cuanto_tiempo_contacto = '$data->por_cuanto_tiempo_contacto', vive_mismo_lugar = '$data->vive_mismo_lugar', atencion_sin_equipo = '$data->atencion_sin_equipo', numero_contacto = '$data->numero_contacto', direccion = '$data->direccion', id_colonia = '$data->id_colonia', otra_colonia = '$data->otra_colonia', id_clasificacion = $data->id_clasificacion, cui = '$data->cui', pasaporte = '$data->pasaporte', frecuencia_cardiaca = '$data->frecuencia_cardiaca', frecuencia_respiratoria = '$data->frecuencia_respiratoria', saturacion_oxigeno = '$data->saturacion_oxigeno', edad_meses = '$data->edad_meses', vacunado = '$data->vacunado', esquema_completo = '$data->esquema_completo', otra_vacuna = '$data->otra_vacuna', vacuna_id = $data->vacuna_id WHERE id = $data->id";
 
         $result = $conn->query($sql);
 

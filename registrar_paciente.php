@@ -67,21 +67,11 @@
 
         }
 
-        if ($data->astrazeneca) {
-            
-            $data->astrazeneca = 'S';
-
-        }
-
-        if($data->sputnik_v){
-
-            $data->sputnik_v = 'S';
-
-        }
 
         $data->id_clasificacion = !empty($data->id_clasificacion) ? "'$data->id_clasificacion'" : "NULL";
+        $data->vacuna_id = !empty($data->vacuna_id) ? "'$data->vacuna_id'" : "NULL";
 
-        $sql = "INSERT INTO paciente (nombre, apellido, dpi, genero, fecha_nacimiento, edad, zona, afiliacion_igss, observaciones, id_campamento, registrado_por, correlativo, id_estado, created_at, segundo_nombre, segundo_apellido, toma_temperatura, calle, avenida, nomenclatura, barrio, observaciones_direccion, contacto_paciente_positivo, cuanto_tiempo_contacto, por_cuanto_tiempo_contacto, vive_mismo_lugar, atencion_sin_equipo, numero_contacto, direccion, id_colonia, otra_colonia, id_clasificacion, cui, pasaporte, frecuencia_cardiaca, frecuencia_respiratoria, saturacion_oxigeno, edad_meses, vacunado, esquema_completo, astrazeneca, sputnik_v, otra_vacuna ) VALUES ('$data->nombre', '$data->apellido', '$data->dpi', '$data->genero', '$data->fecha_nacimiento', '$data->edad', '$data->zona', '$data->afiliacion_igss', '$data->observaciones', '$data->id_campamento', '$data->registrado_por', '$correlativo', 1, NOW(), '$data->segundo_nombre', '$data->segundo_apellido', '$data->toma_temperatura', '$data->calle', '$data->avenida', '$data->nomenclatura', '$data->barrio', '$data->observaciones_direccion', '$data->contacto_paciente_positivo', '$data->cuanto_tiempo_contacto', '$data->por_cuanto_tiempo_contacto', '$data->vive_mismo_lugar', '$data->atencion_sin_equipo', '$data->numero_contacto', '$data->direccion', '$data->id_colonia', '$data->otra_colonia', $data->id_clasificacion, '$data->cui', '$data->pasaporte', '$data->frecuencia_cardiaca', '$data->frecuencia_respiratoria', '$data->saturacion_oxigeno', '$data->edad_meses', '$data->vacunado', '$data->esquema_completo', '$data->astrazeneca', '$data->sputnik_v', '$data->otra_vacuna')";
+        $sql = "INSERT INTO paciente (nombre, apellido, dpi, genero, fecha_nacimiento, edad, zona, afiliacion_igss, observaciones, id_campamento, registrado_por, correlativo, id_estado, created_at, segundo_nombre, segundo_apellido, toma_temperatura, calle, avenida, nomenclatura, barrio, observaciones_direccion, contacto_paciente_positivo, cuanto_tiempo_contacto, por_cuanto_tiempo_contacto, vive_mismo_lugar, atencion_sin_equipo, numero_contacto, direccion, id_colonia, otra_colonia, id_clasificacion, cui, pasaporte, frecuencia_cardiaca, frecuencia_respiratoria, saturacion_oxigeno, edad_meses, vacunado, esquema_completo, otra_vacuna, vacuna_id ) VALUES ('$data->nombre', '$data->apellido', '$data->dpi', '$data->genero', '$data->fecha_nacimiento', '$data->edad', '$data->zona', '$data->afiliacion_igss', '$data->observaciones', '$data->id_campamento', '$data->registrado_por', '$correlativo', 1, NOW(), '$data->segundo_nombre', '$data->segundo_apellido', '$data->toma_temperatura', '$data->calle', '$data->avenida', '$data->nomenclatura', '$data->barrio', '$data->observaciones_direccion', '$data->contacto_paciente_positivo', '$data->cuanto_tiempo_contacto', '$data->por_cuanto_tiempo_contacto', '$data->vive_mismo_lugar', '$data->atencion_sin_equipo', '$data->numero_contacto', '$data->direccion', '$data->id_colonia', '$data->otra_colonia', $data->id_clasificacion, '$data->cui', '$data->pasaporte', '$data->frecuencia_cardiaca', '$data->frecuencia_respiratoria', '$data->saturacion_oxigeno', '$data->edad_meses', '$data->vacunado', '$data->esquema_completo', '$data->otra_vacuna', $data->vacuna_id)";
 
         $result = $conn->query($sql);
 
