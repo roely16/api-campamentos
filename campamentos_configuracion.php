@@ -27,7 +27,8 @@
 
             $sql = "SELECT *
             FROM campamento
-            WHERE privado IS NULL";
+            WHERE privado IS NULL
+            AND inactivo IS NULL";
 
             $result = $conn->query($sql); 
 

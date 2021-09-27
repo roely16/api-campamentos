@@ -75,7 +75,7 @@
 
                 }
 
-            }elseif($id_rol == "2"){
+            }elseif($id_rol == "2" || $id_rol == '9'){
 
                 
                 $sql = "SELECT CONCAT(nombre, CONCAT(' ', apellido)) AS medico
@@ -109,7 +109,7 @@
         }
 
         
-        if ($id_rol == "2") {
+        if ($id_rol == "2" || $id_rol == '9') {
             
             $headers = [
                 [

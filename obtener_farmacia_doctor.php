@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
@@ -11,13 +11,17 @@
 
     if ($data) {
 
+        $offset = ($data->page * 20) - 20;
+
+        $limit_date = '2021-04-28';
+
         $sql = "SELECT t1.*, t2.nombre as colonia,  DATE_FORMAT(t1.created_at, '%d/%m/%Y %h:%i') as fecha_registro
                 FROM paciente t1
-                LEFT JOIN colonia t2 
+                LEFT JOIN colonia t2
                 ON t1.id_colonia = t2.id
                 WHERE t1.id_estado = 3
                 AND t1.id_campamento = $data->id_campamento
-                AND DATE_FORMAT(t1.created_at, '%Y-%m-%d') > '2021-04-28'
+                AND DATE_FORMAT(t1.created_at, '%Y-%m-%d') > '$limit_date'
                 ORDER BY t1.correlativo DESC";
 
         $result = $conn->query($sql);
@@ -25,36 +29,49 @@
         $pacientes = [];
 
         while ($row = $result->fetch_assoc()) {
-            
+
             $id_paciente = $row["id"];
 
             $sql = "SELECT COUNT(*) as total
                     FROM bitacora_paciente
                     WHERE id_paciente = $id_paciente
-                    AND kit_medicamento != ''";
-        
+                    AND kit_medicamento = 'S'";
+
             $result_ = $conn->query($sql);
             $kit = $result_->fetch_assoc();
 
-            if (intval($kit["total"]) > 0) {
+                if (intval($kit["total"]) > 0) {
 
-                // Buscar si requiere azitromicina en los reportes
-                $sql = "SELECT COUNT(*) as total
-                        FROM bitacora_paciente
-                        WHERE id_paciente = $id_paciente
-                        AND requiere_azitromicina != ''";
-                
-                $result_ = $conn->query($sql);
-                $total = $result_->fetch_assoc();
+                    // Buscar si requiere azitromicina en los reportes
+                    $sql = "SELECT COUNT(*) as total
+                            FROM bitacora_paciente
+                            WHERE id_paciente = $id_paciente
+                            AND requiere_azitromicina = 'S'";
 
-                if (intval($total["total"]) > 0) {
+                    $result_ = $conn->query($sql);
+                    $total = $result_->fetch_assoc();
 
-                    $row["requiere_azitromicina"] = true;
+                    if (intval($total["total"]) > 0) {
+
+                        $row["requiere_azitromicina"] = true;
+
+                    }
+
+                    if (!$data->pacientes_sin_kit) {
+                        # code...
+                        $pacientes [] = $row;
+                    }
+
+                }else{
+
+                    if ($data->pacientes_sin_kit) {
+
+                        $pacientes [] = $row;
+
+                    }
 
                 }
 
-                $pacientes [] = $row;
-            }
 
         }
 

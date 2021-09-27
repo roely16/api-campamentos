@@ -15,7 +15,7 @@
                 FROM paciente t1
                 LEFT JOIN colonia t2 
                 ON t1.id_colonia = t2.id
-                WHERE t1.id_estado = 3
+                WHERE t1.id_estado != 4
                 AND t1.id_campamento = $data->id_campamento
                 ORDER BY t1.correlativo DESC";
 
@@ -36,6 +36,8 @@
             $kit = $result_->fetch_assoc();
 
             if (intval($kit["total"]) > 0) {
+
+                // $row["bitacoras"] = intval($kit["total"]);
 
                 // Buscar si requiere azitromicina en los reportes
                 $sql = "SELECT COUNT(*) as total
@@ -92,12 +94,12 @@
             [
                 "text" => "Teléfono",
                 "value" => "numero_contacto",
-                "width" => "8%"
+                "width" => "10%"
             ],
             [
                 "text" => "Azitromicina",
                 "value" => "requiere_azitromicina",
-                "width" => "8%",
+                "width" => "10%",
                 "sortable" => false
             ],
             [
@@ -105,6 +107,11 @@
                 "value" => "fecha_registro",
                 "width" => "10%"
             ],
+            // [
+            //     "text" => "Bitacoras",
+            //     "value" => "bitacoras",
+            //     "width" => "10%"
+            // ],
             [
                 "text" => "Acción",
                 "value" => "accion",
